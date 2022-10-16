@@ -2,7 +2,7 @@ package org.skroba.vk.url;
 
 import java.util.Map;
 
-public class VkFeedUrlGenerator implements UrlGenerator {
+public class VkUrlGenerator implements UrlGenerator {
     private static final String DOMAIN = "https://api.vk.com/method/";
     private static final String ACCESS_TOKEN_FIELD_NAME = "access_token";
     private static final String VERSION_FIELD_NAME = "v";
@@ -11,7 +11,7 @@ public class VkFeedUrlGenerator implements UrlGenerator {
     private final String accessToken;
     private final String version;
     
-    VkFeedUrlGenerator(String prefix, String accessToken, String version) {
+    VkUrlGenerator(String prefix, String accessToken, String version) {
         this.prefix = prefix;
         this.accessToken = accessToken;
         this.version = version;
