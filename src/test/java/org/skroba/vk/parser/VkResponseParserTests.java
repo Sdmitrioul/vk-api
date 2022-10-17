@@ -9,15 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class VkResponseParserTests {
-    private static final String BAD_RESPONSE = "{\"error\": {}}";
+    public static final String BAD_RESPONSE = "{\"error\": {}}";
+    public static final String GOOD_RESPONSE = "{\"response\":{\"items\":[{\"date\":43243244423},{\"date\":43243240423}]}}";
     private static final String BAD_FORMED_RESPONSE = "{\"response\":{\"items\":[{\"date\":\"dksfm\"},{}]}}";
-    private static final String GOOD_RESPONSE = "{\"response\":{\"items\":[{\"date\":12234359043},{\"date\":43243240423}]}}";
-    
     private final Parser<VkResponse> parser = new VkResponseParser();
     
     @Test
     public void parseResponse() throws ParseException {
-        assertEquals(List.of(12234359043L, 43243240423L), parser.parse(GOOD_RESPONSE).getPostTimes());
+        assertEquals(List.of(43243244423L, 43243240423L), parser.parse(GOOD_RESPONSE).getPostTimes());
     }
     
     @Test

@@ -37,10 +37,7 @@ public class VkPostsStatistic implements PostsStatistic {
             return null;
         }
         
-        Map<String, String> params = Map.of(
-                "q", tag,
-                "start_time", Long.toString(fromTime),
-                "end_time", Long.toString(endTime));
+        Map<String, String> params = getParams(tag, startTime, hours);
         
         final String response = client.sendRequest(params);
         
@@ -54,6 +51,17 @@ public class VkPostsStatistic implements PostsStatistic {
         }
     }
     
+    @Override
+    public Map<String, String> getParams(String tag, long startTime, int hours) {
+        final long endTime = startTime / MILLISECONDS_IN_SECOND;
+        final long fromTime = endTime - (long) SECONDS_IN_HOUR * hours;
+        
+        return Map.of(
+                "q", tag,
+                "start_time", Long.toString(fromTime),
+                "end_time", Long.toString(endTime));
+    }
+    
     private List<Integer> processData(VkResponse data, long beginTime, int hours) {
         List<Long> timesOfPosts = data.getPostTimes();
         List<Integer> countOfPosts = new ArrayList<>(Collections.nCopies(hours, 0));
@@ -61,7 +69,7 @@ public class VkPostsStatistic implements PostsStatistic {
         for (long time: timesOfPosts) {
             int hour = (int) ((time - beginTime) / SECONDS_IN_HOUR);
             
-            if (hour > hours) {
+            if (hour >= hours || hour < 0) {
                 continue;
             }
             
