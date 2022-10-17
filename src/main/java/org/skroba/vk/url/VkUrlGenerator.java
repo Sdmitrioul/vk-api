@@ -3,7 +3,7 @@ package org.skroba.vk.url;
 import java.util.Map;
 
 public class VkUrlGenerator implements UrlGenerator {
-    private static final String DOMAIN = "https://api.vk.com/method/";
+    private static final String HOST = "api.vk.com";
     private static final String ACCESS_TOKEN_FIELD_NAME = "access_token";
     private static final String VERSION_FIELD_NAME = "v";
     
@@ -11,15 +11,23 @@ public class VkUrlGenerator implements UrlGenerator {
     private final String accessToken;
     private final String version;
     
-    VkUrlGenerator(String prefix, String accessToken, String version) {
+    public VkUrlGenerator(String prefix, String accessToken, String version) {
         this.prefix = prefix;
         this.accessToken = accessToken;
         this.version = version;
     }
     
     @Override
-    public String getUrl(Map<String, String> params) {
-        StringBuilder url = new StringBuilder(prefix);
+    public String getHost() {
+        return HOST;
+    }
+    
+    @Override
+    public String getUrlString(Map<String, String> params) {
+        StringBuilder url = new StringBuilder(
+                UrlGenerator.constructDomain(true, HOST, "method")
+        );
+        url.append(prefix).append(PARAMS);
         params.forEach((key, value) -> url
                 .append(key)
                 .append(EQUAL)

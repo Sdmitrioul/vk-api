@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,26 +21,26 @@ public class VkUrlGeneratorTests {
     
     @Test
     void testContainingPrefix() {
-        final String result = generator.getUrl(Map.of());
+        final String result = generator.getUrlString(Map.of());
         assertTrue(result.contains(PREFIX));
     }
     
     @Test
     void testContainingToken() {
-        final String result = generator.getUrl(Map.of());
+        final String result = generator.getUrlString(Map.of());
         assertTrue(result.contains("access_token=" + TOKEN));
     }
     
     @Test
     void testContainingVersion() {
-        final String result = generator.getUrl(Map.of());
+        final String result = generator.getUrlString(Map.of());
         assertTrue(result.contains("v=" + VERSION));
     }
     
     @Test
     void testAllParams() {
         final Map<String, String> params = Map.of("first", "first", "second", "second");
-        final String result = generator.getUrl(params);
+        final String result = generator.getUrlString(params);
         
         params.forEach((key, value) -> {
             assertTrue(result.contains(key + "=" + value));
