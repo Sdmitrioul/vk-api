@@ -27,7 +27,7 @@ public class VkUrlGenerator implements UrlGenerator {
         StringBuilder url = new StringBuilder(
                 UrlGenerator.constructDomain(true, HOST, "method")
         );
-        url.append(prefix).append(PARAMS);
+        url.append(SLASH).append(prefix).append(PARAMS);
         params.forEach((key, value) -> url
                 .append(key)
                 .append(EQUAL)

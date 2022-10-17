@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class AbstractClient implements Client {
     private static final int TIMEOUT = 1_000;
     
-    protected static final Logger LOGGER = LogManager.getFormatterLogger(AbstractClient.class);
+    protected static final Logger LOGGER = LogManager.getFormatterLogger("AbstractClient");
     
     protected final UrlGenerator urlGenerator;
     
@@ -49,7 +49,7 @@ public abstract class AbstractClient implements Client {
             }
             return pingProcess.exitValue() == 0;
         } catch (IOException | InterruptedException e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.warn(e.getMessage());
             return false;
         }
     }

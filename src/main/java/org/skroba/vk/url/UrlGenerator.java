@@ -15,10 +15,10 @@ public interface UrlGenerator {
     
     static String constructDomain(boolean isHttps, String host, String... others) {
         StringBuilder result = new StringBuilder(isHttps ? HTTPS : HTTP);
-        result.append("://").append(host).append(SLASH);
+        result.append("://").append(host);
         
         Arrays.stream(others).forEach(
-                part -> result.append(part).append(SLASH)
+                part -> result.append(SLASH).append(part)
         );
     
         return result.toString();
