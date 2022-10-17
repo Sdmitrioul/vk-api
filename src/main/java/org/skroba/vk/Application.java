@@ -9,7 +9,7 @@ import org.skroba.vk.statistic.VkPostsStatistic;
 import org.skroba.vk.url.VkUrlGenerator;
 import org.skroba.vk.util.VkResponse;
 
-public class Main {
+public class Application {
     public static void main(String[] args) {
         String token = System.getenv().getOrDefault("VK_ACCESS_TOKEN", "-");
         String version = System.getenv().getOrDefault("VERSION", "-");
