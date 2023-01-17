@@ -13,8 +13,9 @@ import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
-        if (args.length < 2 || Arrays.stream(args).anyMatch(s -> s == null || s.isEmpty()) || isRightInteger(args[1])) {
+        if (args.length < 2 || Arrays.stream(args).anyMatch(s -> s == null || s.isEmpty()) || !isRightInteger(args[1])) {
             System.out.println("First arg is tag, and second is number of hours between 0 and 24");
+            return;
         }
         
         String token = System.getenv().getOrDefault("VK_ACCESS_TOKEN", "-");
